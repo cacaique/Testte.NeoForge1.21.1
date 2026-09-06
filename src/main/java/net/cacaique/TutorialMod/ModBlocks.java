@@ -12,7 +12,7 @@ public class ModBlocks {
 
     public static final DeferredBlock<LiquidBlock> SCORCHMELT_BLOCK = BLOCKS.register(
             "scorchmelt",
-            () -> new LiquidBlock(ModFluids.SCORCHMELT_SOURCE,
+            () -> new LiquidBlock(ModFluids.SCORCHMELT_SOURCE.get(),
                     BlockBehaviour.Properties.of()
                             .mapColor(MapColor.COLOR_RED)
                             .lightLevel(state -> 15)

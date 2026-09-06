@@ -11,6 +11,6 @@ public class ModItems {
 
     public static final DeferredItem<BucketItem> SCORCHMELT_BUCKET = ITEMS.registerItem(
             "scorchmelt_bucket",
-            properties -> new BucketItem(ModFluids.SCORCHMELT_SOURCE,
+            properties -> new BucketItem(ModFluids.SCORCHMELT_SOURCE.get(),
                     properties.craftRemainder(Items.BUCKET).stacksTo(1)));
 }

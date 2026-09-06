@@ -12,16 +12,27 @@ public class ModFluids {
 
     public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> SCORCHMELT_SOURCE = FLUIDS.register(
             "scorchmelt",
-            () -> new BaseFlowingFluid.Source(SCORCHMELT_PROPERTIES));
+            () -> new BaseFlowingFluid.Source(properties()));
 
     public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> SCORCHMELT_FLOWING = FLUIDS.register(
             "flowing_scorchmelt",
-            () -> new BaseFlowingFluid.Flowing(SCORCHMELT_PROPERTIES));
+            () -> new BaseFlowingFluid.Flowing(properties()));
 
-    public static final BaseFlowingFluid.Properties SCORCHMELT_PROPERTIES = new BaseFlowingFluid.Properties(
-            ModFluidTypes.SCORCHMELT_TYPE, SCORCHMELT_SOURCE, SCORCHMELT_FLOWING)
-            .slopeFindDistance(4)
-            .levelDecreasePerBlock(2)
-            .block(ModBlocks.SCORCHMELT_BLOCK)
-            .bucket(ModItems.SCORCHMELT_BUCKET);
+    // Guardamos as Properties aqui dentro e só montamos elas na primeira vez que
+    // alguém pedir (properties()). Isso evita o problema de "referência circular":
+    // na hora que esse método realmente roda, SCORCHMELT_SOURCE e SCORCHMELT_FLOWING
+    // já existem, então não tem mais problema nenhum.
+    private static BaseFlowingFluid.Properties PROPERTIES;
+
+    private static BaseFlowingFluid.Properties properties() {
+        if (PROPERTIES == null) {
+            PROPERTIES = new BaseFlowingFluid.Properties(
+                    ModFluidTypes.SCORCHMELT_TYPE, SCORCHMELT_SOURCE, SCORCHMELT_FLOWING)
+                    .slopeFindDistance(4)
+                    .levelDecreasePerBlock(2)
+                    .block(ModBlocks.SCORCHMELT_BLOCK)
+                    .bucket(ModItems.SCORCHMELT_BUCKET);
+        }
+        return PROPERTIES;
+    }
 }
