@@ -10,13 +10,13 @@ public class ModFluids {
     public static final DeferredRegister<Fluid> FLUIDS =
             DeferredRegister.create(Registries.FLUID, ModTutorial.MOD_ID);
 
-    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> SCORCHMELT_SOURCE = FLUIDS.register(
+    public static final DeferredHolder<Fluid, ScorchmeltSourceFluid> SCORCHMELT_SOURCE = FLUIDS.register(
             "scorchmelt",
-            () -> new BaseFlowingFluid.Source(properties()));
+            () -> new ScorchmeltSourceFluid(properties()));
 
-    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> SCORCHMELT_FLOWING = FLUIDS.register(
+    public static final DeferredHolder<Fluid, ScorchmeltFlowingFluid> SCORCHMELT_FLOWING = FLUIDS.register(
             "flowing_scorchmelt",
-            () -> new BaseFlowingFluid.Flowing(properties()));
+            () -> new ScorchmeltFlowingFluid(properties()));
 
     // Guardamos as Properties aqui dentro e só montamos elas na primeira vez que
     // alguém pedir (properties()). Isso evita o problema de "referência circular":
