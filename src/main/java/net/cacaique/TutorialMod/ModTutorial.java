@@ -39,6 +39,12 @@ public class ModTutorial {
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public ModTutorial(IEventBus modEventBus, ModContainer modContainer) {
+        // Registra os fluidos, blocos e itens do nosso mod
+        ModFluidTypes.FLUID_TYPES.register(modEventBus);
+        ModFluids.FLUIDS.register(modEventBus);
+        ModBlocks.BLOCKS.register(modEventBus);
+        ModItems.ITEMS.register(modEventBus);
+
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
         // Register ourselves for server and other game events we are interested in.
@@ -51,7 +57,7 @@ public class ModTutorial {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-        }
+    }
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
